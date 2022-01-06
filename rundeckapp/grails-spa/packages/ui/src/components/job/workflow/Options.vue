@@ -61,12 +61,16 @@
   import i18n from './i18n';
   import UndoRedo from '../../util/UndoRedo.vue';
   import OptionsListContent from './OptionsListContent.vue';
+  import {
+    getRundeckContext,
+    RundeckContext
+  } from "@rundeck/ui-trellis";
 
   const w = window as any;
-  const jquery = w.jQuery as any;
+  const winRd = getRundeckContext();
   const _i18n = i18n as any;
-  const lang = w._rundeck.language || 'en';
-  const locale = w._rundeck.locale || 'en_US';
+  const lang = winRd.language || 'en';
+  const locale = winRd.locale || 'en_US';
 
   const messages = {
     [locale]: {

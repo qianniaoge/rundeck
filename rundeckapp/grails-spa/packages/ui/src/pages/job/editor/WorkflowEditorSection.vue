@@ -19,8 +19,13 @@
   import { defineComponent, ref, reactive } from '@vue/composition-api';
   import Options from '../../../components/job/workflow/Options.vue';
   import JsonEmbed from './JsonEmbed.vue';
+  import {
+    getRundeckContext,
+    RundeckContext
+  } from "@rundeck/ui-trellis";
 
   const w = window as any;
+  const winRd = getRundeckContext() as any;
 
   Vue.use(VueCompositionAPI);
 
@@ -44,10 +49,10 @@
     },
     methods: {
       async fetchWorkflowData() {
-        if (w._rundeck && w._rundeck.rdBase && w._rundeck.projectName) {
-          this.rdBase = w._rundeck.rdBase;
-          this.project = w._rundeck.projectName;
-          const workflowData = {wfData: w._rundeck.data.workflowData};
+        if (winRd && winRd.rdBase && winRd.projectName) {
+          this.rdBase = winRd.rdBase;
+          this.project = winRd.projectName;
+          const workflowData = {wfData: winRd.data.workflowData};
           this.updatedData = Object.assign(this, workflowData);
         };
       },
